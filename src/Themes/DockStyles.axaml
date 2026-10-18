@@ -1,4 +1,4 @@
-﻿<!-- (c) Nick Polyak 2021 - http://awebpros.com/
+<!-- (c) Nick Polyak 2021 - http://awebpros.com/
       License: MIT License (https://opensource.org/licenses/MIT)
  
       short overview of copyright rules:
@@ -561,7 +561,7 @@
       <Setter.Value>
         <MultiBinding Converter="{x:Static BoolConverters.And}">
           <Binding Path="SelectedItem.IsActive"
-                   RelativeSource="{RelativeSource Self}"/>
+                   RelativeSource="{RelativeSource Self}" FallbackValue="False"/>
           <Binding Path="IsActive"
                    RelativeSource="{RelativeSource AncestorType=Window}"/>
         </MultiBinding>
@@ -685,9 +685,9 @@
                        Name="PART_SelectedContentHost"
                        Margin="{TemplateBinding Padding}"
 					   OwningDockItem="{Binding Path=SelectedItem, RelativeSource={RelativeSource TemplatedParent}}"
-                       DockDataContext="{Binding Path=SelectedItem.DockDataContext, RelativeSource={RelativeSource TemplatedParent}}"
-                       Content="{Binding Path=OwningDockItem.Content, RelativeSource={RelativeSource Self}}"
-                       ContentTemplate="{Binding Path=OwningDockItem.ContentTemplate, RelativeSource={RelativeSource Self}}"
+                       DockDataContext="{Binding Path=SelectedItem.DockDataContext, RelativeSource={RelativeSource TemplatedParent}, FallbackValue={x:Null}}"
+                       Content="{Binding Path=OwningDockItem.Content, RelativeSource={RelativeSource Self}, FallbackValue={x:Null}}"
+                       ContentTemplate="{Binding Path=OwningDockItem.ContentTemplate, RelativeSource={RelativeSource Self}, FallbackValue={x:Null}}"
                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
 					<Grid x:Name="PART_OverlayWindowHolder" 
@@ -966,7 +966,7 @@
 		<Setter Property="Background"
 				Value="Transparent"/>
 		<Setter Property="np:DockAttachedProperties.IsPointerOverHeader"
-				Value="{Binding Path=(np:FindPartBehavior.VisualPart).IsPointerOver, RelativeSource={RelativeSource Self}}"/>
+				Value="{Binding Path=(np:FindPartBehavior.VisualPart).IsPointerOver, RelativeSource={RelativeSource Self}, FallbackValue=False}"/>
 		<Setter Property="np:DockAttachedProperties.ShowGroupBoundaries">
 			<Setter.Value>
 				<MultiBinding Converter="{x:Static np:BoolConverters.And}">
